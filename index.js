@@ -8,17 +8,14 @@ app.use(express.json());
 
 require("./bot/bot");
 
-const PORT = 3000;
-const MONGO_URI = "mongodb://127.0.0.1:27017/tg-bot";
-
 async function dev() {
   try {
     mongoose
-      .connect(MONGO_URI)
+      .connect(process.env.MONGO_URI)
       .then(() => console.log("Connected to Database"))
       .catch((error) => console.log(error));
 
-    app.listen(PORT, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Server has been started");
     });
   } catch (error) {
